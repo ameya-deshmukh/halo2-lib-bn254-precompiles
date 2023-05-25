@@ -1,0 +1,3 @@
+# halo2-lib-bn254-precompiles
+
+This repository contains the implementations for the [BN254 ](https://eips.ethereum.org/EIPS/eip-196)[precompiles](https://eips.ethereum.org/EIPS/eip-196) ecAdd, ecMul, ecPairing and ecRecover for the [zkEVM Community Edition](https://privacy-scaling-explorations.github.io/zkevm-docs/) using Axiom's [halo2-lib](https://github.com/axiom-crypto/halo2-lib) library. This project was pursued under the Axiom Open Source Program. 
