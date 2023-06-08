@@ -1,94 +1,57 @@
-//BN254 table design and implementation 
 
-use halo2_ecc::{fields::fp, ecc::{EcPoint, EccChip}};
+/*BN254 precompile table design and implementation
 
-use serde::{Deserialize, Serialize};
-/*
+'Proved' by the BN254 subcircuit implementation 
 
-BN254 precompile table 
+The structure of the table is as follows:
 
-Proved by the BN254 subcircuit
+sequence_id |  operation | io | length | index | byte 
+------------| -----------|----|--------|-------|------
+------------| -----------|----|--------|-------|------
 
-This is a 'virtual' table within the BN254 circuit assignments - for the four operations, ecRecover, ecAdd, ecMul and ecPairing.
+sequence_id: identifies the precompile call in an execution trace 
+operation: identifies the operation type (e.g. ecAdd, ecMul, ecPairing etc.)
+io: identifies an input (1) or output (0)
+length: identifies the length of the 
+index: identifies the index of the input/output in the execution trace - ranges from 0 to length-1
+byte: hex data of the input/output, 1 byte 
 
-The table structure is as follows:
+*/
+#[derive(Debug, Clone)]
+pub enum OpTag{
 
-|id | tag | input_length | output_length | input | output |
-|---|-----|--------------|---------------|-------|--------|
-|---|-----|--------------|---------------|-------|--------|
-
-
-where
-
-id: is the ID corresponding to the bn254 operation (e.g. 0 for ecRecover, 1 for ecAdd and so on)
-
-tag: is the tag corresponding to the bn254 operation (e.g. 'ecRecover', 'ecAdd' etc. )
-the tag also acts like a 'selector' of sorts for the operation
-
-
-input_length: is the length of the input in bytes
-
-output_length: is the length of the output in bytes
-
-input: is the input for a bn254 operation
-
-output: is the output for a bn254 operation
-
-
- */
-
-//helper structs, enums and traits
-//might be needed later
-
-/* #[derive(Debug, Clone)]
-struct Expression{}
-
-impl Expression{
-
-fn expr(&self) -> fp {
+    #[allow(non_camel_case_types)]
+    ecRecover=0,
+    ecAdd,
+    ecMul,
+    ecPairing
 }
 
-fn eq(&self, other: &self)-> bool {
-    self.expr() == other.expr()
-}
-
-} */
-
-
-//Tag for BN254 lookup
-pub enum Bn254OperationTag {
-
-ECRECOVER=0,
-ECADD = 1,
-ECMUL=2,
-ECPAIRING=3,
-
-}
-
-//Table row struct
-#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+#[derive(Debug, Clone)]
 pub struct Bn254TableRow{
-    id: String,
-    tag: String,
-    input1: EcPoint,
-    input2: EcPoint,
-    output: EcPoint
-}
-
-//todo: implement with generalized lookup function to be compatible with the zkEVM specs
-pub fn bn254_lookup(&mut bn254_table: Vec<Bn254TableRow> , 
-    id: String, 
-    tag: String, 
-    input1: EcPoint,
-    input2: EcPoint,
-    output: EcPoint,) -> Option<Bn254TableRow, usize> {
-
-    for (index, row) in bn254_table.iter().enumerate() {
-        if row.id == id && row.tag == tag && row.input1 == input1 && row.input2 == input2 && row.output == output {
-            return Some((row.clone(), index));
-        }
-    }
-None
+    pub seq_id: usize,
+    pub operation: OpTag,
+    pub length: usize,
+    pub io: bool,
+    pub index: usize, 
+    pub byte: u8
 } 
 
-//tests 
+impl Bn254TableRow{
+    
+    pub fn new(seq_id: usize, operation: OpTag, length: usize, io: bool, index: usize, byte: u8) -> Self{
+            Self{
+                seq_id,
+                operation,
+                length,
+                io, 
+                index,
+                byte
+            }
+    }
+
+    pub fn add_row(bn254table: &mut Vec<Self>, new_row: Bn254TableRow){
+        bn254table.push(new_row);
+    }
+
+} 

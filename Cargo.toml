@@ -6,9 +6,15 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-halo2_proofs = "0.3.0"
 
-halo2-base = { git = "https://github.com/axiom-crypto/halo2-lib", branch = "release-0.3.0" }
-halo2-ecc = { git = "https://github.com/axiom-crypto/halo2-lib", branch = "release-0.3.0" }
+# halo2 - PSE fork
+halo2_proofs = { git = "https://github.com/privacy-scaling-explorations/halo2.git", tag = "v2023_02_02" }
 
+# halo2-lib - Axiom's helper API
+halo2-base = { git = "https://github.com/axiom-crypto/halo2-lib", branch = "community-edition" }
+halo2-ecc = { git = "https://github.com/axiom-crypto/halo2-lib", branch = "community-edition" }
+
+# other relevant dependencies
 serde = "1.0.163"
+clap = "4.3.2"
+ff = "0.13.0"
