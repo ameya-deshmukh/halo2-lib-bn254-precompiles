@@ -1,3 +1,0 @@
-cargo:rerun-if-changed=build/main.rs
-cargo:rustc-env=TYPENUM_BUILD_CONSTS=/Users/ameya/Desktop/axiom-open-source-program/halo2-lib-bn254-precompiles/target/debug/build/typenum-4c28b1aa938baf81/out/consts.rs
-cargo:rustc-env=TYPENUM_BUILD_OP=/Users/ameya/Desktop/axiom-open-source-program/halo2-lib-bn254-precompiles/target/debug/build/typenum-4c28b1aa938baf81/out/op.rs
