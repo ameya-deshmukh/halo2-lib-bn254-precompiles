@@ -52,6 +52,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "ark-std"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "94893f1e0c6eeab764ade8dc4c0db24caf4fe7cbbaafc0eba0a9030f447b5185"
+dependencies = [
+ "num-traits",
+ "rand",
+]
+
+[[package]]
 name = "arrayref"
 version = "0.3.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -339,6 +349,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "group"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f0f9ef7462f7c099f518d754361858f86d8a07af53ba9af0fe635bbccb151a63"
+dependencies = [
+ "ff 0.13.0",
+ "rand_core",
+ "subtle",
+]
+
+[[package]]
 name = "halo2-base"
 version = "0.3.0"
 source = "git+https://github.com/axiom-crypto/halo2-lib?branch=community-edition#d3d271bfef0b726afe42e6a3317afe676149f838"
@@ -364,7 +385,7 @@ version = "0.3.0"
 source = "git+https://github.com/axiom-crypto/halo2-lib?branch=community-edition#d3d271bfef0b726afe42e6a3317afe676149f838"
 dependencies = [
  "ff 0.12.1",
- "group",
+ "group 0.12.1",
  "halo2-base",
  "itertools",
  "num-bigint",
@@ -383,12 +404,17 @@ dependencies = [
 name = "halo2-lib-bn254-precompiles"
 version = "0.1.0"
 dependencies = [
+ "ark-std",
  "clap",
  "ff 0.13.0",
+ "group 0.13.0",
  "halo2-base",
  "halo2-ecc",
  "halo2_proofs 0.2.0 (git+https://github.com/privacy-scaling-explorations/halo2.git?tag=v2023_02_02)",
+ "itertools",
+ "rand_core",
  "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -398,7 +424,7 @@ source = "git+https://github.com/privacy-scaling-explorations/halo2.git?tag=v202
 dependencies = [
  "blake2b_simd",
  "ff 0.12.1",
- "group",
+ "group 0.12.1",
  "halo2curves 0.3.1 (git+https://github.com/privacy-scaling-explorations/halo2curves.git?tag=0.3.1)",
  "rand_core",
  "rayon",
@@ -414,7 +440,7 @@ dependencies = [
  "blake2b_simd",
  "crossbeam",
  "ff 0.12.1",
- "group",
+ "group 0.12.1",
  "halo2curves 0.3.1 (git+https://github.com/axiom-crypto/halo2.git?branch=axiom/dev)",
  "rand",
  "rand_core",
@@ -430,7 +456,7 @@ version = "0.3.1"
 source = "git+https://github.com/privacy-scaling-explorations/halo2curves.git?tag=0.3.1#9b67e19bca30a35208b0c1b41c1723771e2c9f49"
 dependencies = [
  "ff 0.12.1",
- "group",
+ "group 0.12.1",
  "lazy_static",
  "num-bigint",
  "num-traits",
@@ -447,7 +473,7 @@ version = "0.3.1"
 source = "git+https://github.com/axiom-crypto/halo2.git?branch=axiom/dev#2e9c8724604c926efff139d7d44dbeebfd8d960b"
 dependencies = [
  "ff 0.12.1",
- "group",
+ "group 0.12.1",
  "lazy_static",
  "num-bigint",
  "num-traits",
@@ -638,7 +664,7 @@ checksum = "5cc65faf8e7313b4b1fbaa9f7ca917a0eed499a9663be71477f87993604341d8"
 dependencies = [
  "blake2b_simd",
  "ff 0.12.1",
- "group",
+ "group 0.12.1",
  "lazy_static",
  "rand",
  "static_assertions",

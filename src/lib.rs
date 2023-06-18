@@ -13,6 +13,15 @@ mod tests{
 
     }
 
+    fn optag_range_check_works(){
+
+        use super::circuits::bn254_table::*;
+
+        
+
+
+
+    }
 
 }
 
